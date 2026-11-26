@@ -1,0 +1,69 @@
+:root {
+    --control-border-radius: 0.25rem;
+    --control-focus-outline-width: 3px;
+    --control-focus-outline-color: #000;
+    --control-focus-outline-color2: #fff;
+    --control-focus-outline-offset: 1px;
+}
+
+.sr-only {
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.switchery {
+    display: inline-block;
+    background-clip: content-box;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    cursor: default;
+    height: 25px;
+    position: relative;
+    user-select: none;
+    width: 44px;
+
+    &:has(input[type="checkbox"]:focus) {
+        border-radius: var(--control-border-radius);
+        outline: var(--control-focus-outline-width) solid var(--control-focus-outline-color);
+        outline-offset: var(--control-focus-outline-offset);
+    }
+
+    &:has(input[type="checkbox"]:checked) {
+        background: #0061e0;
+    }
+
+    &:has(input[type="checkbox"]:not(:checked)) {
+        background: #666;
+    }
+
+    input[type="checkbox"] {
+        position: absolute;
+        z-index: 2;
+    }
+
+    > small {
+        background: #fff;
+        border-radius: 100%;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        height: 23px;
+        left: 1px;
+        position: absolute;
+        top: 1px;
+        width: 23px;
+    }
+
+    &-tiny {
+        height: 18px;
+        width: 28px;
+
+        > small {
+            height: 16px;
+            width: 16px;
+        }
+    }
+}

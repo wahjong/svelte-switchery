@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Switchery (Made with Svelte 5)</title>
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body class="cms">
+
+    <form method="post" action="./">
+
+    <h1>Switchery (Made with Svelte 5)</h1>
+
+    <p>
+        <label for="id01">id01</label>
+        <switchery
+            data-id="id01"
+            data-name="aaa"
+            onclick="(function(event, detail) {
+                console.log('%cswitchery.onclick', 'background-color:green', JSON.stringify(detail));
+            });"
+        ></switchery>
+    </p>
+
+    <p>
+        <label for="id02" id="lb02">id02</label>
+        <switchery
+            disabled
+            data-id="id02"
+            data-name="bbb"
+            data-aria-labelledby="lb02"
+            onclick="(function(event, detail) {
+                // console.log('%cswitchery.onclick', 'background-color:green', JSON.stringify(detail))
+            });"
+        ></switchery>
+    </p>
+
+    <p>
+        <label for="id03" id="lb03">id03</label>
+        <input type="checkbox" id="id03" />
+        <switchery
+            data-name="ccc"
+            data-checkbox="id03"
+            data-aria-labelledby="lb03"
+            onclick="(function(event, detail) {
+                // console.log('%cswitchery.onclick', 'background-color:green', JSON.stringify(detail));
+            })"
+        ></switchery>
+    </p>
+
+    <p>
+        <label for="id04" id="lb04">id04</label>
+        <input type="checkbox" id="id04" checked />
+        <switchery type="checkbox"
+            disabled
+            data-name="ddd"
+            data-checkbox="id04"
+            data-aria-labelledby="lb04"
+            onclick="(function(event, detail) {
+                // console.log('%cswitchery.onclick', 'background-color:green', JSON.stringify(detail));
+            })"
+        ></switchery>
+    </p>
+
+    </form>
+
+    <script type="module">
+    import "../src/assets/Switchery.scss";
+    import "../src/Switchery";
+    </script>
+
+</body>
+
+</html>
