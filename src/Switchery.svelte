@@ -6,7 +6,8 @@ type Props = {
     checkbox?: HTMLInputElement;
     checked: boolean;
     disabled: boolean;
-    id?: string;
+    checkboxId?: string;
+    checkboxName?: string;
     name?: string;
     target: HTMLElement;
     onclick: (event: Event, details?: Record<string, unknown>) => void;
@@ -17,7 +18,8 @@ let {
     checkbox,
     checked = false,
     disabled = false,
-    id,
+    checkboxId,
+    checkboxName,
     name,
     target,
     onclick,
@@ -103,14 +105,15 @@ onMount(() => {
     if (!checkbox) {
         checkbox = document.createElement('INPUT') as HTMLInputElement;
         checkbox.type = 'checkbox';
-        checkbox.disabled = disabled;
 
-        if (id)
-            checkbox.id = id;
+        if (checkboxId)
+            checkbox.id = checkboxId;
     }
 
-    checkbox.addEventListener('click', event => {
+    if (!checkbox.name && checkboxName)
+        checkbox.name = checkboxName;
 
+    checkbox.addEventListener('click', event => {
         // prevent checkbox click bubble up again
         event.stopPropagation();
 
@@ -123,8 +126,11 @@ onMount(() => {
         }
     });
 
+    checkbox.disabled = disabled;
     checkbox.className = 'sr-only';
-    console.log('%ccheckbox || checked', 'background-color:brown', checkbox, checkbox.checked || checked);
+
+    console.log('%ccheckbox', 'background-color:brown', checkbox);
+
     setPosition(checkbox.checked || checked);
 
     checkbox.addEventListener('change', (event) => {

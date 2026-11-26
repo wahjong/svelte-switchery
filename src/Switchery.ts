@@ -2,15 +2,15 @@ import { mount } from 'svelte';
 import Switchery from './Switchery.svelte';
 
 document.querySelectorAll<HTMLElement>('switchery').forEach((ele, i) => {
+    console.log('%cele.dataset', 'background-color:purple', ele.dataset);
 
     let name = ele.dataset.name ||  'switchery_' + i;
     console.log(`%cname`, 'background-color:purple', name);
-
-    if (ele.dataset.checkbox) {
+    if (ele.dataset.checkboxId) {
         ele.checkbox = document.querySelector<HTMLInputElement>(
-            `input[type=checkbox][id="${ele.dataset.checkbox}"]`
+            `input[type=checkbox][id="${ele.dataset.checkboxId}"]`
         ) ?? undefined;
-        console.log(`%cinput[type=checkbox][id="${ele.dataset.checkbox}"]`, 'background-color:purple', ele.checkbox);
+        console.log(`%cinput[type=checkbox][id="${ele.dataset.checkboxId}"]`, 'background-color:purple', ele.checkbox);
     }
     console.log('%cele.checkbox', 'background-color:purple', ele.checkbox);
 
@@ -38,12 +38,15 @@ document.querySelectorAll<HTMLElement>('switchery').forEach((ele, i) => {
         target: ele,
         props: {
             target: ele,
-            id: ele.dataset.id,
+            checkboxId: ele.dataset.checkboxId,
+            checkboxName: ele.dataset.checkboxName,
             name,
             checkbox: ele.checkbox,
             disabled: disabled,
             onclick: onclickHandler,
         }
     });
+
+    console.log('%cwindow[%s]', 'background-color:brown', name, window[name]);
 
 });
