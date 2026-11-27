@@ -47,7 +47,6 @@ let defaults = {
 };
 
 function colorize() {
-    console.log('%ccolorize', 'background-color:green');
 
     if (!switcher) return;
 
@@ -56,7 +55,6 @@ function colorize() {
 }
 
 function setSpeed() {
-    console.log('%csetSpeed', 'background-color:green');
 
     let switcherProp = {};
     let jackProp = {
@@ -81,7 +79,6 @@ function setSpeed() {
 }
 
 setPosition = (clicked: boolean) => {
-    console.log('%csetPosition', 'background-color:green', clicked);
 
     checked = clicked;
 
@@ -106,7 +103,6 @@ setPosition = (clicked: boolean) => {
 }
 
 onMount(() => {
-    console.log('%conMount', 'background-color:green');
 
     if (!switcher) return;
 
@@ -142,12 +138,9 @@ onMount(() => {
     checkbox.disabled = disabled;
     checkbox.className = 'sr-only';
 
-    console.log('%ccheckbox', 'background-color:brown', checkbox);
-
     setPosition(checkbox.checked || checked);
 
     checkbox.addEventListener('change', (event) => {
-        console.log('%ccheckbox.change', 'background-color:green', event.target);
 
         const checked = (event.target as HTMLInputElement)!.checked;
 
@@ -183,7 +176,6 @@ onMount(() => {
     class="switchery switchery-default"
     bind:this={switcher}
     onclick={(event) => {
-        console.log('%cspan.onclick', 'background-color:green', checkbox, event);
 
         if (disabled) return;
 
