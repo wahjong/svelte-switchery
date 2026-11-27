@@ -159,19 +159,6 @@ onMount(() => {
 
 </script>
 
-<!-- Switchery.svelte -->
-<!-- arialabelledby: {arialabelledby}, -->
-<!-- ariadescribedby: {ariadescribedby}, -->
-<!-- checkbox: {checkbox}, -->
-<!-- checked: {checked}, -->
-<!-- disabled: {disabled}, -->
-<!-- checkboxId: {checkboxId}, -->
-<!-- checkboxName: {checkboxName}, -->
-<!-- name: {name}, -->
-<!-- target: {target}, -->
-<!-- onchange: {onchange}, -->
-<!-- setPosition: {setPosition}, -->
-
 <span
     class="switchery switchery-default"
     bind:this={switcher}
