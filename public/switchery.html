@@ -15,55 +15,61 @@
     <h1>Accessible Switchery (Made with Svelte 5)</h1>
 
     <p>
-        <label for="id01">id01</label>
+        <label for="id01">label 01</label>
         <switchery
             data-checkbox-id="id01"
             data-checkbox-name="a"
             data-name="w1"
-            onclick="(function(event, detail) {
-                console.log('%cswitchery.onclick', 'background-color:green', JSON.stringify(detail));
+            onchange="(function(event, detail) {
+                console.log('%cswitchery.onchange', 'background-color:green', event, JSON.stringify(detail));
             });"
         ></switchery>
     </p>
 
     <p>
-        <label for="id02">id02 (disabled)</label>
+        <label for="id02">label02 (disabled)</label>
         <switchery
             disabled
             data-checkbox-id="id02"
             data-checkbox-name="b"
             data-name="w2"
-            onclick="(function(event, detail) {
-                console.log('%cswitchery.onclick', 'background-color:green', JSON.stringify(detail))
+            onchange="(function(event, detail) {
+                console.log('%cswitchery.onchange', 'background-color:green', event, JSON.stringify(detail))
             });"
         ></switchery>
     </p>
 
     <p>
-        <label for="id03">id03</label>
+        <strong id="lab03">label 03</strong>
         <input type="checkbox" id="id03" name="c" checked />
         <switchery
+            data-aria-labelledby="lab03"
+            data-aria-describedby="des03"
             data-checkbox-id="id03"
             data-checkbox-name="c"
             data-name="w3"
-            onclick="(function(event, detail) {
-                console.log('%cswitchery.onclick', 'background-color:green', JSON.stringify(detail));
+            onchange="(function(event, detail) {
+                console.log('%cswitchery.onchange', 'background-color:green', event, JSON.stringify(detail));
             })"
         ></switchery>
+        <strong id="des03">description 03</strong>
     </p>
 
     <p>
-        <label for="id04">id04 (disabled)</label>
+        <strong id="lab04">label 04 (disabled)</strong>
         <input type="checkbox" id="id04" name="d" checked />
         <switchery
             disabled
+            data-aria-labelledby="lab04"
+            data-aria-describedby="des04"
             data-checkbox-id="id04"
             data-checkbox-name="d"
             data-name="w4"
-            onclick="(function(event, detail) {
-                console.log('%cswitchery.onclick', 'background-color:green', JSON.stringify(detail))
+            onchange="(function(event, detail) {
+                console.log('%cswitchery.onchange', 'background-color:green', event, JSON.stringify(detail))
             });"
         ></switchery>
+        <strong id="des04">description 04</strong>
     </p>
 
     </form>

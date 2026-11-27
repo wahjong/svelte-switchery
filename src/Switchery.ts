@@ -1,6 +1,8 @@
 import { mount } from 'svelte';
 import Switchery from './Switchery.svelte';
 
+export type TonChange = (event: Event, details?: Record<string, unknown>) => void;
+
 document.querySelectorAll<HTMLElement>('switchery').forEach((ele, i) => {
     console.log('%cele.dataset', 'background-color:purple', ele.dataset);
 
@@ -14,17 +16,17 @@ document.querySelectorAll<HTMLElement>('switchery').forEach((ele, i) => {
     }
     console.log('%cele.checkbox', 'background-color:purple', ele.checkbox);
 
-    let onclickHandler;
+    let onchangeHandler: TonChange | undefined;
 
     try {
-        const handler = ele.getAttribute('onclick');
+        const handler = ele.getAttribute('onchange');
         if (handler) {
-            onclickHandler = eval(handler);
+            onchangeHandler = eval(handler);
         }
     } catch(error) {
         console.warn('Inline onclick invalid', error);
     }
-    console.log('%conclickHandler', 'background-color:purple', onclickHandler);
+    console.log('%conchangeHandler', 'background-color:purple', onchangeHandler);
 
     let disabled: boolean;
     try {
@@ -38,12 +40,14 @@ document.querySelectorAll<HTMLElement>('switchery').forEach((ele, i) => {
         target: ele,
         props: {
             target: ele,
+            arialabelledby: ele.dataset.ariaLabelledby,
+            ariadescribedby: ele.dataset.ariaDescribedby,
             checkboxId: ele.dataset.checkboxId,
             checkboxName: ele.dataset.checkboxName,
             name,
             checkbox: ele.checkbox,
             disabled: disabled,
-            onclick: onclickHandler,
+            onchange: onchangeHandler,
         }
     });
 

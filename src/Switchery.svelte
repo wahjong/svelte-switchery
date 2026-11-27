@@ -1,8 +1,9 @@
-<script lang="ts">
-import { onMount } from 'svelte';
-import { Transitionize as transitionize } from './transitionize.js';
+<script module lang="ts">
+import type { TonChange } from './Switchery';
 
 type Props = {
+    arialabelledby?: string;
+    ariadescribedby?: string;
     checkbox?: HTMLInputElement;
     checked: boolean;
     disabled: boolean;
@@ -10,11 +11,18 @@ type Props = {
     checkboxName?: string;
     name?: string;
     target: HTMLElement;
-    onclick: (event: Event, details?: Record<string, unknown>) => void;
+    onchange?: TonChange;
     setPosition: (clicked: boolean) => void;
 }
+</script>
+
+<script lang="ts">
+import { onMount } from 'svelte';
+import { Transitionize as transitionize } from './transitionize.js';
 
 let {
+    arialabelledby,
+    ariadescribedby,
     checkbox,
     checked = false,
     disabled = false,
@@ -22,7 +30,7 @@ let {
     checkboxName,
     name,
     target,
-    onclick,
+    onchange,
     setPosition,
 }: Props = $props();
 
@@ -39,7 +47,7 @@ let defaults = {
 };
 
 function colorize() {
-    console.log('%cSwitchery.colorize', 'background-color:green');
+    console.log('%ccolorize', 'background-color:green');
 
     if (!switcher) return;
 
@@ -48,7 +56,7 @@ function colorize() {
 }
 
 function setSpeed() {
-    console.log('%cSwitchery.setSpeed', 'background-color:green');
+    console.log('%csetSpeed', 'background-color:green');
 
     let switcherProp = {};
     let jackProp = {
@@ -73,7 +81,7 @@ function setSpeed() {
 }
 
 setPosition = (clicked: boolean) => {
-    console.log('%cSwitchery.setPosition', 'background-color:green', clicked);
+    console.log('%csetPosition', 'background-color:green', clicked);
 
     checked = clicked;
 
@@ -98,7 +106,7 @@ setPosition = (clicked: boolean) => {
 }
 
 onMount(() => {
-    console.log('%cSwitchery.onMount', 'background-color:green');
+    console.log('%conMount', 'background-color:green');
 
     if (!switcher) return;
 
@@ -112,6 +120,11 @@ onMount(() => {
 
     if (!checkbox.name && checkboxName)
         checkbox.name = checkboxName;
+
+    if (!checkbox.getAttribute('aria-labelledby') && arialabelledby)
+        checkbox.setAttribute('aria-labelledby', arialabelledby);
+    if (!checkbox.getAttribute('aria-describedby') && ariadescribedby)
+        checkbox.setAttribute('aria-describedby', ariadescribedby);
 
     checkbox.addEventListener('click', event => {
         // prevent checkbox click bubble up again
@@ -140,8 +153,8 @@ onMount(() => {
 
         setPosition(checked);
 
-        if (onclick) {
-            onclick(event, {checked});
+        if (onchange) {
+            onchange(event, {checked});
         }
     });
 
@@ -154,15 +167,23 @@ onMount(() => {
 </script>
 
 <!-- Switchery.svelte -->
-<!-- id: {id}, -->
+<!-- arialabelledby: {arialabelledby}, -->
+<!-- ariadescribedby: {ariadescribedby}, -->
+<!-- checkbox: {checkbox}, -->
 <!-- checked: {checked}, -->
 <!-- disabled: {disabled}, -->
-<!-- onclick: {onclick}, -->
+<!-- checkboxId: {checkboxId}, -->
+<!-- checkboxName: {checkboxName}, -->
+<!-- name: {name}, -->
+<!-- target: {target}, -->
+<!-- onchange: {onchange}, -->
+<!-- setPosition: {setPosition}, -->
+
 <span
     class="switchery switchery-default"
     bind:this={switcher}
     onclick={(event) => {
-        console.log('%cSwitchery.onclick', 'background-color:green', checkbox, event);
+        console.log('%cspan.onclick', 'background-color:green', checkbox, event);
 
         if (disabled) return;
 
