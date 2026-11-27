@@ -1,6 +1,6 @@
 # svelte-switchery
 
-An accessible and customisable toggle switch component maded with Svelte 5.
+An accessible and customisable toggle switch component made with Svelte 5.
 
 ### Configuration
 
